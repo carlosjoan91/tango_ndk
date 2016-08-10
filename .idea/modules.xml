@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file:///hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/cpp_basic_examples.iml" filepath="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/cpp_basic_examples.iml" />
+      <module fileurl="file:///hd2/home/carlos/android-dev/tango_ros_ndk/cpp_example_util/app/cpp_example_util.iml" filepath="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_example_util/app/cpp_example_util.iml" />
+      <module fileurl="file:///hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_area_description/hello_area_description.iml" filepath="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_area_description/hello_area_description.iml" />
+      <module fileurl="file:///hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_depth_perception/hello_depth_perception.iml" filepath="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_depth_perception/hello_depth_perception.iml" />
+      <module fileurl="file:///hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_motion_tracking/hello_motion_tracking.iml" filepath="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_motion_tracking/hello_motion_tracking.iml" />
+      <module fileurl="file:///hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_video/hello_video.iml" filepath="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_video/hello_video.iml" />
+    </modules>
+  </component>
+</project>

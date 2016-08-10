@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_area_description" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_depth_perception" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_motion_tracking" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_video" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_example_util/app" />
+          </set>
+        </option>
+        <option name="myModules">
+          <set>
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_area_description" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_depth_perception" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_motion_tracking" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_basic_examples/hello_video" />
+            <option value="/hd2/home/carlos/android-dev/tango_ros_ndk/cpp_example_util/app" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

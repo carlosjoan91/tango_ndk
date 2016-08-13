@@ -24,10 +24,14 @@
 #include "tango_support_api.h"  // NOLINT
 
 #include "ros/ros.h"
+#include <tf2_ros/static_transform_broadcaster.h>
+#include <tf2_ros/transform_broadcaster.h>
+#include <geometry_msgs/TransformStamped.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Header.h>
 #include <sensor_msgs/PointField.h>
 #include <sensor_msgs/PointCloud2.h>
+#include <geometry_msgs/PoseWithCovarianceStamped.h>
 
 #define LOG_TAG "cpp_hello_depth_perception"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
@@ -38,20 +42,30 @@ namespace hello_depth_perception {
 struct tango_context{
   ros::NodeHandle* nh;
   TangoSupportPointCloudManager *pc_manager;
+  pthread_mutex_t* pose_mutex_ptr;
+  geometry_msgs::TransformStamped* odom_to_base_ptr;
 };
 
 // HelloDepthPerceptionApp handles the application lifecycle and resources.
 class HelloDepthPerceptionApp {
  public:
-  int seq;
+  unsigned int seq;
+  unsigned int map_to_odom_seq;
+  unsigned int odom_to_base_seq;
   pthread_t pub_thread;
+  pthread_mutex_t pose_mutex;
   ros::Publisher pc_pub;
+  ros::Subscriber known_pose_sub;
   sensor_msgs::PointCloud2 pc_msg;
   tango_context ctxt;
-  TangoXYZij local_pc;
-
+  geometry_msgs::TransformStamped map_to_odom;
+  geometry_msgs::TransformStamped odom_to_base;
+  geometry_msgs::TransformStamped base_to_depth;
+  geometry_msgs::TransformStamped base_to_color;
+  tf2_ros::TransformBroadcaster* tf_bcaster;
+  tf2_ros::StaticTransformBroadcaster* static_tf_bcaster;
   // Class constructor.
-  HelloDepthPerceptionApp() : tango_config_(nullptr) {}
+  HelloDepthPerceptionApp() : tango_config_(nullptr), tf_bcaster(nullptr), static_tf_bcaster(nullptr), map_to_odom_seq(0), odom_to_base_seq(0) {}
 
   // Class destructor.
   ~HelloDepthPerceptionApp() {
@@ -59,6 +73,10 @@ class HelloDepthPerceptionApp {
       TangoConfig_free(tango_config_);
       tango_config_ = nullptr;
     }
+    if (tf_bcaster != nullptr)
+      delete tf_bcaster;
+    if (static_tf_bcaster != nullptr)
+      delete static_tf_bcaster;
   }
 
   // OnCreate() callback is called when this Android application's
@@ -85,6 +103,8 @@ class HelloDepthPerceptionApp {
   // resources and other application will not be able to connect to
   // Tango Service.
   void OnPause();
+
+  void SetCurrentPoseCallback(const geometry_msgs::PoseWithCovarianceStampedConstPtr&);
 
  private:
   // Tango configuration file, this object is for configuring Tango Service

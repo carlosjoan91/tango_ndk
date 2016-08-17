@@ -20,7 +20,7 @@
 
 #include "hello_depth_perception/hello_depth_perception_app.h"
 
-#include <tf/transform_datatypes.h>
+//#include <tf/transform_datatypes.h>
 
 
 namespace {
@@ -136,8 +136,8 @@ void HelloDepthPerceptionApp::OnCreate(JNIEnv* env, jobject caller_activity) {
   }
 
   int argc = 3;
-  //char *argv[] = {"nothing_important" , "__master:=http://10.185.0.249:11311", "__ip:=10.185.0.224"};
-  char *argv[] = {"nothing_important" , "__master:=http://192.168.1.110:11311", "__ip:=192.168.1.220"};
+  char *argv[] = {"nothing_important" , "__master:=http://10.185.0.249:11311", "__ip:=10.185.0.224"};
+  //char *argv[] = {"nothing_important" , "__master:=http://192.168.1.110:11311", "__ip:=192.168.1.220"};
   LOGI("GOING TO ROS INIT");
 
   for(int i = 0; i < argc; i++){
@@ -187,7 +187,7 @@ void HelloDepthPerceptionApp::OnCreate(JNIEnv* env, jobject caller_activity) {
   base_to_color.header.frame_id = "tango_base_link";
   base_to_color.child_frame_id = "tango_camera_color";
   pc_pub = (ctxt.nh)->advertise<sensor_msgs::PointCloud2>("tango_image_depth", 1);
-  known_pose_sub = (ctxt.nh)->subscribe("initial_pose", 1, &HelloDepthPerceptionApp::SetCurrentPoseCallback, this);
+  //known_pose_sub = (ctxt.nh)->subscribe("initial_pose", 1, &HelloDepthPerceptionApp::SetCurrentPoseCallback, this);
   int version = 0;
   TangoErrorType err =
       TangoSupport_GetTangoVersion(env, caller_activity, &version);
@@ -203,7 +203,7 @@ void HelloDepthPerceptionApp::SetCurrentPoseCallback(const geometry_msgs::PoseWi
 {
 
   //maptoodom = known * invert(odomtobase) 
-  tf::Pose known, maptoodom;
+  /*tf::Pose known, maptoodom;
   tf::Vector3 maptoodom_vect;
   tf::Quaternion maptoodom_quat;
   tf::poseMsgToTF(known_pose->pose.pose, known);
@@ -221,7 +221,7 @@ void HelloDepthPerceptionApp::SetCurrentPoseCallback(const geometry_msgs::PoseWi
   map_to_odom.transform.rotation.y = maptoodom_quat.getY();
   map_to_odom.transform.rotation.z = maptoodom_quat.getZ();
   map_to_odom.transform.rotation.w = maptoodom_quat.getW();
-  pthread_mutex_unlock(&pose_mutex);
+  pthread_mutex_unlock(&pose_mutex);*/
 }
 
 void HelloDepthPerceptionApp::OnTangoServiceConnected(JNIEnv* env,

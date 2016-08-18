@@ -26,6 +26,7 @@
 #include "ros/ros.h"
 #include <tf2_ros/static_transform_broadcaster.h>
 #include <tf2_ros/transform_broadcaster.h>
+#include <tf2_ros/transform_listener.h>
 #include <geometry_msgs/TransformStamped.h>
 #include <std_msgs/String.h>
 #include <std_msgs/Header.h>
@@ -60,12 +61,15 @@ class HelloDepthPerceptionApp {
   tango_context ctxt;
   geometry_msgs::TransformStamped map_to_odom;
   geometry_msgs::TransformStamped odom_to_base;
+  geometry_msgs::TransformStamped base_to_pose; //tf from tango pose, to pose of person holding tango forward
   geometry_msgs::TransformStamped base_to_depth;
   geometry_msgs::TransformStamped base_to_color;
   tf2_ros::TransformBroadcaster* tf_bcaster;
   tf2_ros::StaticTransformBroadcaster* static_tf_bcaster;
+  tf2_ros::Buffer* tf_buffer;
+  tf2_ros::TransformListener* tf_listener;
   // Class constructor.
-  HelloDepthPerceptionApp() : tango_config_(nullptr), tf_bcaster(nullptr), static_tf_bcaster(nullptr), map_to_odom_seq(0), odom_to_base_seq(0) {}
+  HelloDepthPerceptionApp() : tango_config_(nullptr), tf_bcaster(nullptr), static_tf_bcaster(nullptr), tf_buffer(nullptr), tf_listener(nullptr), map_to_odom_seq(0), odom_to_base_seq(0) {}
 
   // Class destructor.
   ~HelloDepthPerceptionApp() {
@@ -77,6 +81,10 @@ class HelloDepthPerceptionApp {
       delete tf_bcaster;
     if (static_tf_bcaster != nullptr)
       delete static_tf_bcaster;
+    if (tf_buffer != nullptr)
+      delete tf_buffer;
+    if (tf_listener != nullptr)
+      delete tf_listener;
   }
 
   // OnCreate() callback is called when this Android application's

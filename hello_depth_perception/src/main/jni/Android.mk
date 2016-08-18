@@ -17,6 +17,7 @@ LOCAL_PATH := $(call my-dir)
 PROJECT_ROOT:= $(call my-dir)/../../../../..
 
 include $(CLEAR_VARS)
+LOCAL_DISABLE_FATAL_LINKER_WARNINGS=true
 LOCAL_MODULE    := libhello_depth_perception
 LOCAL_SHARED_LIBRARIES := tango_client_api tango_support_api
 LOCAL_CFLAGS    := -std=c++11
